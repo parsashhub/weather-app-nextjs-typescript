@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import Index from "@/pages/components/WeatherHome";
+import Index from "@/components/WeatherHome";
+import LandscapeDisablerContainer from "../components/LandscapeDisbalerContainer";
 import axios from "axios";
 
 const Home = () => {
@@ -45,7 +46,9 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <Index />
+        <LandscapeDisablerContainer>
+          <Index />
+        </LandscapeDisablerContainer>
       </main>
     </>
   );
