@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import Index from "@/components/WeatherHome";
+import WeatherHome from "@/components/WeatherHome";
 import LandscapeDisablerContainer from "../components/LandscapeDisbalerContainer";
 import axios from "axios";
 
@@ -19,24 +19,9 @@ const Home = () => {
     }
   };
 
-  const getWeatherStatus = async () => {
-    try {
-      const res = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=2584972354a8436b85b150508232601&q=${ip}&aqi=yes`
-      );
-      console.log(res);
-    } catch (e: any) {
-      console.error(e.response);
-    }
-  };
-
   useEffect(() => {
     getData();
   }, []);
-
-  useEffect(() => {
-    if (ip) getWeatherStatus();
-  }, [ip]);
 
   return (
     <>
@@ -47,7 +32,7 @@ const Home = () => {
       </Head>
       <main>
         <LandscapeDisablerContainer>
-          <Index />
+          <WeatherHome ip={ip} />
         </LandscapeDisablerContainer>
       </main>
     </>
