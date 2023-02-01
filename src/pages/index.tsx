@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import WeatherHome from "@/components/WeatherHome";
 import LandscapeDisablerContainer from "../components/LandscapeDisbalerContainer";
+import { initInterceptors } from "@/reuseable/axios";
 import axios from "axios";
+import { Puff } from "react-loader-spinner";
 
 const Home = () => {
   const [ip, setIp] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(false);
 
   const getData = async () => {
     try {
@@ -18,6 +21,13 @@ const Home = () => {
       console.error(e?.response);
     }
   };
+
+  useEffect(() => {
+    initInterceptors(
+      () => setLoader(true),
+      () => setLoader(false)
+    );
+  }, []);
 
   useEffect(() => {
     getData();
@@ -34,6 +44,21 @@ const Home = () => {
         <LandscapeDisablerContainer>
           <WeatherHome ip={ip} />
         </LandscapeDisablerContainer>
+        <div style={{ margin: "auto" }}>
+          <Puff
+            height="120"
+            width="120"
+            color="#4b4ebf"
+            ariaLabel="puff-loading"
+            radius={1}
+            wrapperStyle={{
+              position: "fixed",
+              top: "30%",
+              left: "36%",
+            }}
+            visible={loader}
+          />
+        </div>
       </main>
     </>
   );
