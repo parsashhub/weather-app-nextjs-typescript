@@ -41,24 +41,29 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
+        <Puff
+          width={120}
+          height={120}
+          color="#4b4ebf"
+          ariaLabel="puff-loading"
+          radius={1}
+          wrapperStyle={{
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirections: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: "9999",
+          }}
+          visible={loader}
+        />
         <LandscapeDisablerContainer>
           <WeatherHome ip={ip} />
         </LandscapeDisablerContainer>
-        <div style={{ margin: "auto" }}>
-          <Puff
-            height="120"
-            width="120"
-            color="#4b4ebf"
-            ariaLabel="puff-loading"
-            radius={1}
-            wrapperStyle={{
-              position: "fixed",
-              top: "30%",
-              left: "36%",
-            }}
-            visible={loader}
-          />
-        </div>
       </main>
     </>
   );
