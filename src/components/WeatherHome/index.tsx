@@ -45,69 +45,89 @@ const WeatherHome = ({ ip }: Props) => {
   }, [debouncedValue]);
 
   return (
-    <section style={{ padding: "20px" }}>
-      <Grid container direction="column" spacing={3}>
-        <Grid item xs={12}>
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { delay: 0.4 } }}
-          >
-            <TextField
-              label="Search"
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder="search your city here"
-              variant="outlined"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <SearchIcon fontSize="large" />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              fullWidth
-            />
-          </motion.div>
-        </Grid>
-        <Grid item xs={12} sx={{ marginTop: "10rem" }}>
-          {data ? (
+    <div style={{ padding: "2rem" }}>
+      <section>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            justifyContent: "center",
+            minHeight: "25dvh",
+          }}
+        >
+          <Grid item xs={12}>
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1, transition: { delay: 0.4 } }}
             >
-              <Paper
-                className={classes.glass}
-                sx={{
-                  textAlign: "center",
-                  borderRadius: "8px",
-                  paddingX: "20px",
-                  paddingY: "50px",
+              <TextField
+                label="Search"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder="search your city here"
+                variant="outlined"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton>
+                        <SearchIcon fontSize="large" />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 }}
-              >
-                <Typography variant="h5">
-                  {data?.location?.country
-                    ? `${data?.location.country}, `
-                    : null}
-                  {data?.location?.name}
-                </Typography>
-                <Typography variant="h1" sx={{ marginY: "20px" }}>
-                  {data?.current?.temp_c}
-                  <PanoramaFishEyeIcon sx={{ position: "absolute" }} />
-                </Typography>
-                <Typography variant="h6">
-                  {data?.current?.condition?.text}
-                </Typography>
-                <Typography variant="body1" sx={{ marginTop: "10px" }}>
-                  Feels like {Math.round(data?.current?.feelslike_c)} degree
-                </Typography>
-              </Paper>
+                fullWidth
+              />
             </motion.div>
-          ) : null}
+          </Grid>
         </Grid>
-      </Grid>
-    </section>
+      </section>
+      <section style={{ marginTop: "2rem" }}>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid item xs={12}>
+            {data ? (
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1, transition: { delay: 0.4 } }}
+              >
+                <Paper
+                  className={classes.glass}
+                  sx={{
+                    textAlign: "center",
+                    borderRadius: "8px",
+                    paddingX: "20px",
+                    paddingY: "50px",
+                  }}
+                >
+                  <Typography variant="h5">
+                    {data?.location?.country
+                      ? `${data?.location.country}, `
+                      : null}
+                    {data?.location?.name}
+                  </Typography>
+                  <Typography variant="h1" sx={{ marginY: "20px" }}>
+                    {data?.current?.temp_c}
+                    <PanoramaFishEyeIcon sx={{ position: "absolute" }} />
+                  </Typography>
+                  <Typography variant="h6">
+                    {data?.current?.condition?.text}
+                  </Typography>
+                  <Typography variant="body1" sx={{ marginTop: "10px" }}>
+                    Feels like {Math.round(data?.current?.feelslike_c)} degree
+                  </Typography>
+                </Paper>
+              </motion.div>
+            ) : null}
+          </Grid>
+        </Grid>
+      </section>
+    </div>
   );
 };
 
